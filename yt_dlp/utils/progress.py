@@ -74,7 +74,9 @@ class ProgressCalculator:
         self._times.append(current_time)
         self._downloaded.append(self.downloaded)
 
-        offset = bisect.bisect_left(self._times, current_time - self.SAMPLING_WINDOW)
+        offset = bisect.bisect_left(
+            self._times, current_time - self.SAMPLING_WINDOW
+        )
         del self._times[:offset]
         del self._downloaded[:offset]
         if len(self._times) < 2:
@@ -87,7 +89,11 @@ class ProgressCalculator:
             return
 
         self.speed.set((self.downloaded - self._downloaded[0]) / download_time)
-        if self.total and self.speed.value and self.elapsed > self.GRACE_PERIOD:
+        if (
+            self.total
+            and self.speed.value
+            and self.elapsed > self.GRACE_PERIOD
+        ):
             self.eta.set((self.total - self.downloaded) / self.speed.value)
         else:
             self.eta.reset()
@@ -103,7 +109,9 @@ class SmoothValue:
         if self.smooth is None:
             self.smooth = self.value
         else:
-            self.smooth = (1 - self._smoothing) * value + self._smoothing * self.smooth
+            self.smooth = (
+                1 - self._smoothing
+            ) * value + self._smoothing * self.smooth
 
     def reset(self):
         self.value = self.smooth = self._initial

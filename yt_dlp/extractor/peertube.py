@@ -16,7 +16,7 @@ from ..utils import (
 
 
 class PeerTubeIE(InfoExtractor):
-    _INSTANCES_RE = r'''(?:
+    _INSTANCES_RE = r"""(?:
                             # Taken from https://instances.joinpeertube.org/instances
                             0ch\.tv|
                             3dctube\.3dcandy\.social|
@@ -1312,116 +1312,135 @@ class PeerTubeIE(InfoExtractor):
                             videos\.tcit\.fr|
                             peertube\.cpy\.re|
                             canard\.tube
-                        )'''
-    _UUID_RE = r'[\da-zA-Z]{22}|[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}'
-    _API_BASE = 'https://%s/api/v1/videos/%s/%s'
-    _VALID_URL = rf'''(?x)
+                        )"""
+    _UUID_RE = r"[\da-zA-Z]{22}|[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}"
+    _API_BASE = "https://%s/api/v1/videos/%s/%s"
+    _VALID_URL = rf"""(?x)
                     (?:
                         peertube:(?P<host>[^:]+):|
                         https?://(?P<host_2>{_INSTANCES_RE})/(?:videos/(?:watch|embed)|api/v\d/videos|w)/
                     )
                     (?P<id>{_UUID_RE})
-                    '''
-    _EMBED_REGEX = [r'''(?x)<iframe[^>]+\bsrc=["\'](?P<url>(?:https?:)?//{_INSTANCES_RE}/videos/embed/{cls._UUID_RE})''']
-    _TESTS = [{
-        'url': 'https://framatube.org/videos/watch/9c9de5e8-0a1e-484a-b099-e80766180a6d',
-        'md5': '8563064d245a4be5705bddb22bb00a28',
-        'info_dict': {
-            'id': '9c9de5e8-0a1e-484a-b099-e80766180a6d',
-            'ext': 'mp4',
-            'title': 'What is PeerTube?',
-            'description': 'md5:3fefb8dde2b189186ce0719fda6f7b10',
-            'thumbnail': r're:https?://.*\.(?:jpg|png)',
-            'timestamp': 1538391166,
-            'upload_date': '20181001',
-            'uploader': 'Framasoft',
-            'uploader_id': '3',
-            'uploader_url': 'https://framatube.org/accounts/framasoft',
-            'channel': 'A propos de PeerTube',
-            'channel_id': '2215',
-            'channel_url': 'https://framatube.org/video-channels/joinpeertube',
-            'language': 'en',
-            'license': 'Attribution - Share Alike',
-            'duration': 113,
-            'view_count': int,
-            'like_count': int,
-            'dislike_count': int,
-            'tags': ['framasoft', 'peertube'],
-            'categories': ['Science & Technology'],
+                    """
+    _EMBED_REGEX = [
+        r"""(?x)<iframe[^>]+\bsrc=["\'](?P<url>(?:https?:)?//{_INSTANCES_RE}/videos/embed/{cls._UUID_RE})"""
+    ]
+    _TESTS = [
+        {
+            "url": "https://framatube.org/videos/watch/9c9de5e8-0a1e-484a-b099-e80766180a6d",
+            "md5": "8563064d245a4be5705bddb22bb00a28",
+            "info_dict": {
+                "id": "9c9de5e8-0a1e-484a-b099-e80766180a6d",
+                "ext": "mp4",
+                "title": "What is PeerTube?",
+                "description": "md5:3fefb8dde2b189186ce0719fda6f7b10",
+                "thumbnail": r"re:https?://.*\.(?:jpg|png)",
+                "timestamp": 1538391166,
+                "upload_date": "20181001",
+                "uploader": "Framasoft",
+                "uploader_id": "3",
+                "uploader_url": "https://framatube.org/accounts/framasoft",
+                "channel": "A propos de PeerTube",
+                "channel_id": "2215",
+                "channel_url": "https://framatube.org/video-channels/joinpeertube",
+                "language": "en",
+                "license": "Attribution - Share Alike",
+                "duration": 113,
+                "view_count": int,
+                "like_count": int,
+                "dislike_count": int,
+                "tags": ["framasoft", "peertube"],
+                "categories": ["Science & Technology"],
+            },
         },
-    }, {
-        'url': 'https://peertube2.cpy.re/w/122d093a-1ede-43bd-bd34-59d2931ffc5e',
-        'info_dict': {
-            'id': '122d093a-1ede-43bd-bd34-59d2931ffc5e',
-            'ext': 'mp4',
-            'title': 'E2E tests',
-            'uploader_id': '37855',
-            'timestamp': 1589276219,
-            'upload_date': '20200512',
-            'uploader': 'chocobozzz',
+        {
+            "url": "https://peertube2.cpy.re/w/122d093a-1ede-43bd-bd34-59d2931ffc5e",
+            "info_dict": {
+                "id": "122d093a-1ede-43bd-bd34-59d2931ffc5e",
+                "ext": "mp4",
+                "title": "E2E tests",
+                "uploader_id": "37855",
+                "timestamp": 1589276219,
+                "upload_date": "20200512",
+                "uploader": "chocobozzz",
+            },
         },
-    }, {
-        'url': 'https://peertube2.cpy.re/w/3fbif9S3WmtTP8gGsC5HBd',
-        'info_dict': {
-            'id': '3fbif9S3WmtTP8gGsC5HBd',
-            'ext': 'mp4',
-            'title': 'E2E tests',
-            'uploader_id': '37855',
-            'timestamp': 1589276219,
-            'upload_date': '20200512',
-            'uploader': 'chocobozzz',
+        {
+            "url": "https://peertube2.cpy.re/w/3fbif9S3WmtTP8gGsC5HBd",
+            "info_dict": {
+                "id": "3fbif9S3WmtTP8gGsC5HBd",
+                "ext": "mp4",
+                "title": "E2E tests",
+                "uploader_id": "37855",
+                "timestamp": 1589276219,
+                "upload_date": "20200512",
+                "uploader": "chocobozzz",
+            },
         },
-    }, {
-        'url': 'https://peertube2.cpy.re/api/v1/videos/3fbif9S3WmtTP8gGsC5HBd',
-        'info_dict': {
-            'id': '3fbif9S3WmtTP8gGsC5HBd',
-            'ext': 'mp4',
-            'title': 'E2E tests',
-            'uploader_id': '37855',
-            'timestamp': 1589276219,
-            'upload_date': '20200512',
-            'uploader': 'chocobozzz',
+        {
+            "url": "https://peertube2.cpy.re/api/v1/videos/3fbif9S3WmtTP8gGsC5HBd",
+            "info_dict": {
+                "id": "3fbif9S3WmtTP8gGsC5HBd",
+                "ext": "mp4",
+                "title": "E2E tests",
+                "uploader_id": "37855",
+                "timestamp": 1589276219,
+                "upload_date": "20200512",
+                "uploader": "chocobozzz",
+            },
         },
-    }, {
-        # Issue #26002
-        'url': 'peertube:spacepub.space:d8943b2d-8280-497b-85ec-bc282ec2afdc',
-        'info_dict': {
-            'id': 'd8943b2d-8280-497b-85ec-bc282ec2afdc',
-            'ext': 'mp4',
-            'title': 'Dot matrix printer shell demo',
-            'uploader_id': '3',
-            'timestamp': 1587401293,
-            'upload_date': '20200420',
-            'uploader': 'Drew DeVault',
+        {
+            # Issue #26002
+            "url": "peertube:spacepub.space:d8943b2d-8280-497b-85ec-bc282ec2afdc",
+            "info_dict": {
+                "id": "d8943b2d-8280-497b-85ec-bc282ec2afdc",
+                "ext": "mp4",
+                "title": "Dot matrix printer shell demo",
+                "uploader_id": "3",
+                "timestamp": 1587401293,
+                "upload_date": "20200420",
+                "uploader": "Drew DeVault",
+            },
         },
-    }, {
-        'url': 'https://peertube.debian.social/videos/watch/0b04f13d-1e18-4f1d-814e-4979aa7c9c44',
-        'only_matching': True,
-    }, {
-        # nsfw
-        'url': 'https://vod.ksite.de/videos/watch/9bb88cd3-9959-46d9-9ab9-33d2bb704c39',
-        'only_matching': True,
-    }, {
-        'url': 'https://vod.ksite.de/videos/embed/fed67262-6edb-4d1c-833b-daa9085c71d7',
-        'only_matching': True,
-    }, {
-        'url': 'https://peertube.tv/api/v1/videos/c1875674-97d0-4c94-a058-3f7e64c962e8',
-        'only_matching': True,
-    }, {
-        'url': 'peertube:framatube.org:b37a5b9f-e6b5-415c-b700-04a5cd6ec205',
-        'only_matching': True,
-    }]
+        {
+            "url": "https://peertube.debian.social/videos/watch/0b04f13d-1e18-4f1d-814e-4979aa7c9c44",
+            "only_matching": True,
+        },
+        {
+            # nsfw
+            "url": "https://vod.ksite.de/videos/watch/9bb88cd3-9959-46d9-9ab9-33d2bb704c39",
+            "only_matching": True,
+        },
+        {
+            "url": "https://vod.ksite.de/videos/embed/fed67262-6edb-4d1c-833b-daa9085c71d7",
+            "only_matching": True,
+        },
+        {
+            "url": "https://peertube.tv/api/v1/videos/c1875674-97d0-4c94-a058-3f7e64c962e8",
+            "only_matching": True,
+        },
+        {
+            "url": "peertube:framatube.org:b37a5b9f-e6b5-415c-b700-04a5cd6ec205",
+            "only_matching": True,
+        },
+    ]
 
     @staticmethod
     def _extract_peertube_url(webpage, source_url):
         mobj = re.match(
-            rf'https?://(?P<host>[^/]+)/(?:videos/(?:watch|embed)|w)/(?P<id>{PeerTubeIE._UUID_RE})', source_url)
-        if mobj and any(p in webpage for p in (
+            rf"https?://(?P<host>[^/]+)/(?:videos/(?:watch|embed)|w)/(?P<id>{PeerTubeIE._UUID_RE})",
+            source_url,
+        )
+        if mobj and any(
+            p in webpage
+            for p in (
                 'meta property="og:platform" content="PeerTube"',
-                '<title>PeerTube<',
-                'There will be other non JS-based clients to access PeerTube',
-                '>We are sorry but it seems that PeerTube is not compatible with your web browser.<')):
-            return 'peertube:{}:{}'.format(*mobj.group('host', 'id'))
+                "<title>PeerTube<",
+                "There will be other non JS-based clients to access PeerTube",
+                ">We are sorry but it seems that PeerTube is not compatible with your web browser.<",
+            )
+        ):
+            return "peertube:{}:{}".format(*mobj.group("host", "id"))
 
     @classmethod
     def _extract_embed_urls(cls, url, webpage):
@@ -1433,85 +1452,109 @@ class PeerTubeIE(InfoExtractor):
         if peertube_url:
             return [peertube_url]
 
-    def _call_api(self, host, video_id, path, note=None, errnote=None, fatal=True):
+    def _call_api(
+        self, host, video_id, path, note=None, errnote=None, fatal=True
+    ):
         return self._download_json(
-            self._API_BASE % (host, video_id, path), video_id,
-            note=note, errnote=errnote, fatal=fatal)
+            self._API_BASE % (host, video_id, path),
+            video_id,
+            note=note,
+            errnote=errnote,
+            fatal=fatal,
+        )
 
     def _get_subtitles(self, host, video_id):
         captions = self._call_api(
-            host, video_id, 'captions', note='Downloading captions JSON',
-            fatal=False)
+            host,
+            video_id,
+            "captions",
+            note="Downloading captions JSON",
+            fatal=False,
+        )
         if not isinstance(captions, dict):
             return
-        data = captions.get('data')
+        data = captions.get("data")
         if not isinstance(data, list):
             return
         subtitles = {}
         for e in data:
-            language_id = try_get(e, lambda x: x['language']['id'], str)
-            caption_url = urljoin(f'https://{host}', e.get('captionPath'))
+            language_id = try_get(e, lambda x: x["language"]["id"], str)
+            caption_url = urljoin(f"https://{host}", e.get("captionPath"))
             if not caption_url:
                 continue
-            subtitles.setdefault(language_id or 'en', []).append({
-                'url': caption_url,
-            })
+            subtitles.setdefault(language_id or "en", []).append(
+                {
+                    "url": caption_url,
+                }
+            )
         return subtitles
 
     def _real_extract(self, url):
         mobj = self._match_valid_url(url)
-        host = mobj.group('host') or mobj.group('host_2')
-        video_id = mobj.group('id')
+        host = mobj.group("host") or mobj.group("host_2")
+        video_id = mobj.group("id")
 
         video = self._call_api(
-            host, video_id, '', note='Downloading video JSON')
+            host, video_id, "", note="Downloading video JSON"
+        )
 
-        title = video['name']
+        title = video["name"]
 
         formats, is_live = [], False
-        files = video.get('files') or []
-        for playlist in (video.get('streamingPlaylists') or []):
+        files = video.get("files") or []
+        for playlist in video.get("streamingPlaylists") or []:
             if not isinstance(playlist, dict):
                 continue
-            if playlist_url := url_or_none(playlist.get('playlistUrl')):
+            if playlist_url := url_or_none(playlist.get("playlistUrl")):
                 is_live = True
-                formats.extend(self._extract_m3u8_formats(
-                    playlist_url, video_id, fatal=False, live=True))
-            playlist_files = playlist.get('files')
+                formats.extend(
+                    self._extract_m3u8_formats(
+                        playlist_url, video_id, fatal=False, live=True
+                    )
+                )
+            playlist_files = playlist.get("files")
             if not (playlist_files and isinstance(playlist_files, list)):
                 continue
             files.extend(playlist_files)
         for file_ in files:
             if not isinstance(file_, dict):
                 continue
-            file_url = url_or_none(file_.get('fileUrl'))
+            file_url = url_or_none(file_.get("fileUrl"))
             if not file_url:
                 continue
-            file_size = int_or_none(file_.get('size'))
-            format_id = try_get(
-                file_, lambda x: x['resolution']['label'], str)
+            file_size = int_or_none(file_.get("size"))
+            format_id = try_get(file_, lambda x: x["resolution"]["label"], str)
             f = parse_resolution(format_id)
-            f.update({
-                'url': file_url,
-                'format_id': format_id,
-                'filesize': file_size,
-            })
-            if format_id == '0p':
-                f['vcodec'] = 'none'
+            f.update(
+                {
+                    "url": file_url,
+                    "format_id": format_id,
+                    "filesize": file_size,
+                }
+            )
+            if format_id == "0p":
+                f["vcodec"] = "none"
             else:
-                f['fps'] = int_or_none(file_.get('fps'))
+                f["fps"] = int_or_none(file_.get("fps"))
             is_live = False
             formats.append(f)
 
-        description = video.get('description')
+        description = video.get("description")
         if description and len(description) >= 250:
             # description is shortened
             full_description = self._call_api(
-                host, video_id, 'description', note='Downloading description JSON',
-                fatal=False)
+                host,
+                video_id,
+                "description",
+                note="Downloading description JSON",
+                fatal=False,
+            )
 
             if isinstance(full_description, dict):
-                description = str_or_none(full_description.get('description')) or description
+                description = (
+                    str_or_none(full_description.get("description"))
+                    or description
+                )
 
         subtitles = self.extract_subtitles(host, video_id)
 
@@ -1519,132 +1562,176 @@ class PeerTubeIE(InfoExtractor):
             return try_get(video, lambda x: x[section][field], type_)
 
         def account_data(field, type_):
-            return data('account', field, type_)
+            return data("account", field, type_)
 
         def channel_data(field, type_):
-            return data('channel', field, type_)
+            return data("channel", field, type_)
 
-        category = data('category', 'label', str)
+        category = data("category", "label", str)
         categories = [category] if category else None
 
-        nsfw = video.get('nsfw')
+        nsfw = video.get("nsfw")
         if nsfw is bool:
             age_limit = 18 if nsfw else 0
         else:
             age_limit = None
 
-        webpage_url = f'https://{host}/videos/watch/{video_id}'
+        webpage_url = f"https://{host}/videos/watch/{video_id}"
 
         return {
-            'id': video_id,
-            'title': title,
-            'description': description,
-            'thumbnail': urljoin(webpage_url, video.get('thumbnailPath')),
-            'timestamp': unified_timestamp(video.get('publishedAt')),
-            'uploader': account_data('displayName', str),
-            'uploader_id': str_or_none(account_data('id', int)),
-            'uploader_url': url_or_none(account_data('url', str)),
-            'channel': channel_data('displayName', str),
-            'channel_id': str_or_none(channel_data('id', int)),
-            'channel_url': url_or_none(channel_data('url', str)),
-            'language': data('language', 'id', str),
-            'license': data('licence', 'label', str),
-            'duration': int_or_none(video.get('duration')),
-            'view_count': int_or_none(video.get('views')),
-            'like_count': int_or_none(video.get('likes')),
-            'dislike_count': int_or_none(video.get('dislikes')),
-            'age_limit': age_limit,
-            'tags': try_get(video, lambda x: x['tags'], list),
-            'categories': categories,
-            'formats': formats,
-            'subtitles': subtitles,
-            'is_live': is_live,
-            'webpage_url': webpage_url,
+            "id": video_id,
+            "title": title,
+            "description": description,
+            "thumbnail": urljoin(webpage_url, video.get("thumbnailPath")),
+            "timestamp": unified_timestamp(video.get("publishedAt")),
+            "uploader": account_data("displayName", str),
+            "uploader_id": str_or_none(account_data("id", int)),
+            "uploader_url": url_or_none(account_data("url", str)),
+            "channel": channel_data("displayName", str),
+            "channel_id": str_or_none(channel_data("id", int)),
+            "channel_url": url_or_none(channel_data("url", str)),
+            "language": data("language", "id", str),
+            "license": data("licence", "label", str),
+            "duration": int_or_none(video.get("duration")),
+            "view_count": int_or_none(video.get("views")),
+            "like_count": int_or_none(video.get("likes")),
+            "dislike_count": int_or_none(video.get("dislikes")),
+            "age_limit": age_limit,
+            "tags": try_get(video, lambda x: x["tags"], list),
+            "categories": categories,
+            "formats": formats,
+            "subtitles": subtitles,
+            "is_live": is_live,
+            "webpage_url": webpage_url,
         }
 
 
 class PeerTubePlaylistIE(InfoExtractor):
-    IE_NAME = 'PeerTube:Playlist'
+    IE_NAME = "PeerTube:Playlist"
     _TYPES = {
-        'a': 'accounts',
-        'c': 'video-channels',
-        'w/p': 'video-playlists',
+        "a": "accounts",
+        "c": "video-channels",
+        "w/p": "video-playlists",
     }
-    _VALID_URL = r'''(?x)
+    _VALID_URL = r"""(?x)
                         https?://(?P<host>{})/(?P<type>(?:{}))/
                     (?P<id>[^/]+)
-                    '''.format(PeerTubeIE._INSTANCES_RE, '|'.join(_TYPES.keys()))
-    _TESTS = [{
-        'url': 'https://peertube.debian.social/w/p/hFdJoTuyhNJVa1cDWd1d12',
-        'info_dict': {
-            'id': 'hFdJoTuyhNJVa1cDWd1d12',
-            'description': 'Diversas palestras do Richard Stallman no Brasil.',
-            'title': 'Richard Stallman no Brasil',
-            'timestamp': 1599676222,
+                    """.format(
+        PeerTubeIE._INSTANCES_RE, "|".join(_TYPES.keys())
+    )
+    _TESTS = [
+        {
+            "url": "https://peertube.debian.social/w/p/hFdJoTuyhNJVa1cDWd1d12",
+            "info_dict": {
+                "id": "hFdJoTuyhNJVa1cDWd1d12",
+                "description": "Diversas palestras do Richard Stallman no Brasil.",
+                "title": "Richard Stallman no Brasil",
+                "timestamp": 1599676222,
+            },
+            "playlist_mincount": 9,
         },
-        'playlist_mincount': 9,
-    }, {
-        'url': 'https://peertube2.cpy.re/a/chocobozzz/videos',
-        'info_dict': {
-            'id': 'chocobozzz',
-            'timestamp': 1553874564,
-            'title': 'chocobozzz',
+        {
+            "url": "https://peertube2.cpy.re/a/chocobozzz/videos",
+            "info_dict": {
+                "id": "chocobozzz",
+                "timestamp": 1553874564,
+                "title": "chocobozzz",
+            },
+            "playlist_mincount": 2,
         },
-        'playlist_mincount': 2,
-    }, {
-        'url': 'https://framatube.org/c/bf54d359-cfad-4935-9d45-9d6be93f63e8/videos',
-        'info_dict': {
-            'id': 'bf54d359-cfad-4935-9d45-9d6be93f63e8',
-            'timestamp': 1519917377,
-            'title': 'Les vidéos de Framasoft',
+        {
+            "url": "https://framatube.org/c/bf54d359-cfad-4935-9d45-9d6be93f63e8/videos",
+            "info_dict": {
+                "id": "bf54d359-cfad-4935-9d45-9d6be93f63e8",
+                "timestamp": 1519917377,
+                "title": "Les vidéos de Framasoft",
+            },
+            "playlist_mincount": 345,
         },
-        'playlist_mincount': 345,
-    }, {
-        'url': 'https://peertube2.cpy.re/c/blender_open_movies@video.blender.org/videos',
-        'info_dict': {
-            'id': 'blender_open_movies@video.blender.org',
-            'timestamp': 1542287810,
-            'title': 'Official Blender Open Movies',
+        {
+            "url": "https://peertube2.cpy.re/c/blender_open_movies@video.blender.org/videos",
+            "info_dict": {
+                "id": "blender_open_movies@video.blender.org",
+                "timestamp": 1542287810,
+                "title": "Official Blender Open Movies",
+            },
+            "playlist_mincount": 11,
         },
-        'playlist_mincount': 11,
-    }]
-    _API_BASE = 'https://%s/api/v1/%s/%s%s'
+    ]
+    _API_BASE = "https://%s/api/v1/%s/%s%s"
     _PAGE_SIZE = 30
 
     def call_api(self, host, name, path, base, **kwargs):
         return self._download_json(
-            self._API_BASE % (host, base, name, path), name, **kwargs)
+            self._API_BASE % (host, base, name, path), name, **kwargs
+        )
 
     def fetch_page(self, host, playlist_id, playlist_type, page):
         page += 1
         video_data = self.call_api(
-            host, playlist_id,
-            f'/videos?sort=-createdAt&start={self._PAGE_SIZE * (page - 1)}&count={self._PAGE_SIZE}&nsfw=both',
-            playlist_type, note=f'Downloading page {page}').get('data', [])
+            host,
+            playlist_id,
+            f"/videos?sort=-createdAt&start={self._PAGE_SIZE * (page - 1)}&count={self._PAGE_SIZE}&nsfw=both",
+            playlist_type,
+            note=f"Downloading page {page}",
+        ).get("data", [])
         for video in video_data:
-            short_uuid = video.get('shortUUID') or try_get(video, lambda x: x['video']['shortUUID'])
-            video_title = video.get('name') or try_get(video, lambda x: x['video']['name'])
+            short_uuid = video.get("shortUUID") or try_get(
+                video, lambda x: x["video"]["shortUUID"]
+            )
+            video_title = video.get("name") or try_get(
+                video, lambda x: x["video"]["name"]
+            )
             yield self.url_result(
-                f'https://{host}/w/{short_uuid}', PeerTubeIE.ie_key(),
-                video_id=short_uuid, video_title=video_title)
+                f"https://{host}/w/{short_uuid}",
+                PeerTubeIE.ie_key(),
+                video_id=short_uuid,
+                video_title=video_title,
+            )
 
     def _extract_playlist(self, host, playlist_type, playlist_id):
-        info = self.call_api(host, playlist_id, '', playlist_type, note='Downloading playlist information', fatal=False)
+        info = self.call_api(
+            host,
+            playlist_id,
+            "",
+            playlist_type,
+            note="Downloading playlist information",
+            fatal=False,
+        )
 
-        playlist_title = info.get('displayName')
-        playlist_description = info.get('description')
-        playlist_timestamp = unified_timestamp(info.get('createdAt'))
-        channel = try_get(info, lambda x: x['ownerAccount']['name']) or info.get('displayName')
-        channel_id = try_get(info, lambda x: x['ownerAccount']['id']) or info.get('id')
-        thumbnail = format_field(info, 'thumbnailPath', f'https://{host}%s')
+        playlist_title = info.get("displayName")
+        playlist_description = info.get("description")
+        playlist_timestamp = unified_timestamp(info.get("createdAt"))
+        channel = try_get(
+            info, lambda x: x["ownerAccount"]["name"]
+        ) or info.get("displayName")
+        channel_id = try_get(
+            info, lambda x: x["ownerAccount"]["id"]
+        ) or info.get("id")
+        thumbnail = format_field(info, "thumbnailPath", f"https://{host}%s")
 
-        entries = OnDemandPagedList(functools.partial(
-            self.fetch_page, host, playlist_id, playlist_type), self._PAGE_SIZE)
+        entries = OnDemandPagedList(
+            functools.partial(
+                self.fetch_page, host, playlist_id, playlist_type
+            ),
+            self._PAGE_SIZE,
+        )
 
         return self.playlist_result(
-            entries, playlist_id, playlist_title, playlist_description,
-            timestamp=playlist_timestamp, channel=channel, channel_id=channel_id, thumbnail=thumbnail)
+            entries,
+            playlist_id,
+            playlist_title,
+            playlist_description,
+            timestamp=playlist_timestamp,
+            channel=channel,
+            channel_id=channel_id,
+            thumbnail=thumbnail,
+        )
 
     def _real_extract(self, url):
-        playlist_type, host, playlist_id = self._match_valid_url(url).group('type', 'host', 'id')
-        return self._extract_playlist(host, self._TYPES[playlist_type], playlist_id)
+        playlist_type, host, playlist_id = self._match_valid_url(url).group(
+            "type", "host", "id"
+        )
+        return self._extract_playlist(
+            host, self._TYPES[playlist_type], playlist_id
+        )

@@ -30,38 +30,38 @@ class TestCompat(unittest.TestCase):
             _ = compat.compat_pycrypto_AES  # Must not raise error
 
     def test_compat_expanduser(self):
-        old_home = os.environ.get('HOME')
-        test_str = R'C:\Documents and Settings\тест\Application Data'
+        old_home = os.environ.get("HOME")
+        test_str = R"C:\Documents and Settings\тест\Application Data"
         try:
-            os.environ['HOME'] = test_str
-            self.assertEqual(compat_expanduser('~'), test_str)
+            os.environ["HOME"] = test_str
+            self.assertEqual(compat_expanduser("~"), test_str)
         finally:
-            os.environ['HOME'] = old_home or ''
+            os.environ["HOME"] = old_home or ""
 
     def test_compat_etree_fromstring(self):
-        xml = '''
+        xml = """
             <root foo="bar" spam="中文">
                 <normal>foo</normal>
                 <chinese>中文</chinese>
                 <foo><bar>spam</bar></foo>
             </root>
-        '''
+        """
         doc = compat_etree_fromstring(xml.encode())
-        self.assertTrue(isinstance(doc.attrib['foo'], str))
-        self.assertTrue(isinstance(doc.attrib['spam'], str))
-        self.assertTrue(isinstance(doc.find('normal').text, str))
-        self.assertTrue(isinstance(doc.find('chinese').text, str))
-        self.assertTrue(isinstance(doc.find('foo/bar').text, str))
+        self.assertTrue(isinstance(doc.attrib["foo"], str))
+        self.assertTrue(isinstance(doc.attrib["spam"], str))
+        self.assertTrue(isinstance(doc.find("normal").text, str))
+        self.assertTrue(isinstance(doc.find("chinese").text, str))
+        self.assertTrue(isinstance(doc.find("foo/bar").text, str))
 
     def test_compat_etree_fromstring_doctype(self):
-        xml = '''<?xml version="1.0"?>
+        xml = """<?xml version="1.0"?>
 <!DOCTYPE smil PUBLIC "-//W3C//DTD SMIL 2.0//EN" "http://www.w3.org/2001/SMIL20/SMIL20.dtd">
-<smil xmlns="http://www.w3.org/2001/SMIL20/Language"></smil>'''
+<smil xmlns="http://www.w3.org/2001/SMIL20/Language"></smil>"""
         compat_etree_fromstring(xml)
 
     def test_struct_unpack(self):
-        self.assertEqual(struct.unpack('!B', b'\x00'), (0,))
+        self.assertEqual(struct.unpack("!B", b"\x00"), (0,))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

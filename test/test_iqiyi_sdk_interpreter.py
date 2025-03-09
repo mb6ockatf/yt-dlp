@@ -35,10 +35,10 @@ class TestIqiyiSDKInterpreter(unittest.TestCase):
         If `sign` is incorrect, /validate call throws an HTTP 556 error
         """
         logger = WarningLogger()
-        ie = IqiyiIE(FakeYDL({'logger': logger}))
-        ie._perform_login('foo', 'bar')
-        self.assertTrue('unable to log in:' in logger.messages[0])
+        ie = IqiyiIE(FakeYDL({"logger": logger}))
+        ie._perform_login("foo", "bar")
+        self.assertTrue("unable to log in:" in logger.messages[0])
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
